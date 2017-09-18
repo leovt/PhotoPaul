@@ -1,0 +1,42 @@
+<h1>{{ project }}</h1>
+Titel: <input type="text" value="{{ project }}" />
+<hr/>
+<form action="{% url 'PhotoBlog:insert' project.id %}" method="POST">
+{% csrf_token %} 
+<button type="submit" value="T" name="type">Hier einen Textabschnitt einfügen</button>
+<button type="submit" value="P" name="type">Hier ein Foto einfügen</button>
+</form>
+<hr/>
+
+{% for element in project.ordered_elements %}
+<div id="el{{element.id}}">
+{% if element.type == "T" %}
+<textarea style="width:80%" rows=6>{{ element.text }}</textarea></p>
+{% elif element.type == "P" %}
+<table>
+<tr>
+<td width="50%">
+<img src="{{ MEDIA_URL }}{{ element.photo.image }}" style="max-width: 80%"/>
+</td>
+<td>
+Das Foto links durch ein anderes ersetzen:<br/>
+{% for photo in project.photo_set.all %}
+<img src="{{ MEDIA_URL }}{{ photo.image }}" style="max-width: 64"/>
+{% endfor %}
+</td></tr></table>
+
+{% endif %}
+<form action="{% url 'PhotoBlog:element' element.id %}" method="POST">
+{% csrf_token %} 
+<button type="submit" name="action" value="delete">Löschen</button>
+</form>
+</div>
+<hr/>
+<form action="{% url 'PhotoBlog:insert' project.id %}" method="POST">
+{% csrf_token %} 
+<input type="hidden" name="after" value="{{ element.id }}"/>
+<button type="submit" value="T" name="type">Hier einen Textabschnitt einfügen</button>
+<button type="submit" value="P" name="type">Hier ein Foto einfügen</button>
+</form>
+<hr/>
+{% endfor %}

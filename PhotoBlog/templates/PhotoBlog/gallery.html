@@ -1,0 +1,7 @@
+<h1>{{ project }}</h1>
+<h2>Alle Bilder</h2>
+<ul>
+{% for photo in project.photo_set.all %}
+<li><img src="{{ MEDIA_URL }}{{ photo.image }}" style="max-width: 200; max-height:200"/></li>
+{% endfor %}
+</ul>

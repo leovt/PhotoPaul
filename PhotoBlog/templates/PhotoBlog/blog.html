@@ -1,0 +1,8 @@
+<h1>{{ project }}</h1>
+{% for element in project.ordered_elements %}
+{% if element.type == "T" %}
+<p>{{ element.text }}</p>
+{% elif element.type == "P" %}
+<p><img src="{{ MEDIA_URL }}{{ element.photo.image }}" style="max-width: 80%"/></p>
+{% endif %}
+{% endfor %}

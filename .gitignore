@@ -1,0 +1,7 @@
+.project
+.pydevproject
+.settings
+__pycache__
+db.save
+db.sqlite3
+photo_uploads

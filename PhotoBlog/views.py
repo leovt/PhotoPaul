@@ -25,6 +25,20 @@ def element(request, element_id):
     anchor = ''
     if request.POST['action'] == 'delete':
         element.delete()
+    elif request.POST['action'] == 'text_update':
+        if element.type != Element.TEXT:
+            return HttpResponseBadRequest("need to specify valid action")
+        element.text = request.POST.get('text', '')
+        element.save()    
+    elif request.POST['action'].startswith('photo_update:'):
+        if element.type != Element.PHOTO:
+            return HttpResponseBadRequest("need to specify valid action")
+        photo_id = request.POST['action'][13:]
+        photo = element.project.photo_set.get(id=photo_id)
+        if not photo:
+            return HttpResponseBadRequest("need to specify valid photo")
+        element.photo = photo
+        element.save()
     else:
         return HttpResponseBadRequest("need to specify valid action")
 

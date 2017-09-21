@@ -35,6 +35,9 @@ class Photo(models.Model):
     image = models.ImageField(upload_to='photo_uploads/')
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     
+    def __str__(self):
+        return self.image.name
+    
 class Element(models.Model):
     TEXT = 'T'
     PHOTO = 'P'

@@ -1,0 +1,7 @@
+<form method="post" enctype="multipart/form-data">
+{% csrf_token %}
+  <label>Bilder auswählen
+    <input type="file" size="50" accept="image/*" name="images" multiple> 
+  </label>  
+  <input type="submit" />
+</form>

@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Project, Element
-from django.http.response import HttpResponseBadRequest, HttpResponseRedirect
+from .models import Project, Element, Photo
+from django.http.response import HttpResponseBadRequest, HttpResponseRedirect, HttpResponse
 from django.urls.base import reverse
-from django.views import View
+from django.utils.html import escape
+from django.utils import timezone
 
 # Create your views here.
 def gallery(request, project_id):
@@ -62,3 +63,16 @@ def insert(request, project_id):
     el = project.insert_element(after=after, type=type)
     
     return HttpResponseRedirect('%s#el%d' % (reverse('PhotoBlog:editor', args=(project.id,)), el.id))
+
+def upload(request, project_id):
+    project = get_object_or_404(Project, id=project_id)
+    if request.method == 'GET':
+        return render(request, 'PhotoBlog/upload.html', {'project': project})
+    if request.method == "POST":
+        photos = []
+        for image in request.FILES.getlist("images"):
+            ph = Photo(project=project, image=(image))
+            ph.date_taken = timezone.now()
+            ph.save()
+            photos.append((ph, len(image)))
+        return HttpResponse(escape(repr(photos)))

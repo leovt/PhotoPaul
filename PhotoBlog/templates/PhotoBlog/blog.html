@@ -6,9 +6,7 @@
 </head>
 <body>
 <nav class="toolbar">
-<a class="tool" href="#">Bearbeiten</a>
-<a class="tool" href="#">Photos hochladen</a>
-<a class="tool" href="#">Veröffentlichen</a>
+<a class="tool" href="{% url 'PhotoBlog:editor' project.id %}">Bearbeiten</a>
 <a class="tool" href="#">Abmelden</a>
 </nav>
 <article class="blog">

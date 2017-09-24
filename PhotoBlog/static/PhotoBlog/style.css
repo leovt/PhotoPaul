@@ -47,3 +47,36 @@ body {
 	max-width: 100%;
 	margin: auto;
 }
+
+.thumbnail {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.thumbbutton {
+	width: 8em;
+	height: 8em;
+	vertical-align: top;
+	padding: 0;
+	border-style: none;
+	margin: 0.2em;
+	background-color: transparent;
+}
+
+.edit {
+	border-radius: 5px;
+	padding: 5px;
+	background-color: lavender;
+}
+
+.insert {
+	margin: 1em auto;
+	border-width: 1px 0;
+	border-style: solid;
+	padding: 5px 0;
+}
+
+textarea {
+	width: calc(100% - 4px);
+	font-family: inherit;
+	border: none;

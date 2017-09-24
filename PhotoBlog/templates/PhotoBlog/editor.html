@@ -1,31 +1,44 @@
+<!DOCTYPE html>
+<html><head>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'PhotoBlog/style.css' %}" />
+<title>{{ project }}</title>
+</head>
+<body>
+<nav class="toolbar">
+<a class="tool" href="{% url 'PhotoBlog:blog' project.id %}">Seite ansehen</a>
+<a class="tool" href="{% url 'PhotoBlog:upload' project.id %}">Photos hochladen</a>
+<a class="tool" href="#">Abmelden</a>
+</nav>
+<article class="blog" style="max-width: 95%">
 <h1>{{ project }}</h1>
 Titel: <input type="text" value="{{ project }}" />
-<hr/>
+<div class="insert">
 <form action="{% url 'PhotoBlog:insert' project.id %}" method="POST">
 {% csrf_token %} 
 <button type="submit" value="T" name="type">Hier einen Textabschnitt einfügen</button>
 <button type="submit" value="P" name="type">Hier ein Foto einfügen</button>
 </form>
-<hr/>
+</div>
 
 {% for element in project.ordered_elements %}
-<div id="el{{element.id}}">
+<div id="el{{element.id}}" class="edit edit{{element.type}}">
 <form action="{% url 'PhotoBlog:element' element.id %}" method="POST">
 {% csrf_token %} 
 {% if element.type == "T" %}
-<textarea style="width:80%" rows=6 name="text">{{ element.text }}</textarea></p>
+<textarea rows=6 name="text">{{ element.text }}</textarea>
 <button type="submit" name="action" value="text_update">Speichern</button>
 {% elif element.type == "P" %}
 <table>
 <tr>
 <td width="50%">
-<img src="{{ MEDIA_URL }}{{ element.photo.image }}" style="max-width: 80%"/>
+<img src="{{ MEDIA_URL }}{{ element.photo.image }}" class="photo"/>
 </td>
 <td>
 Das Foto links durch ein anderes ersetzen:<br/>
 {% for photo in project.photo_set.all %}
-<button type="submit" name="action" value="photo_update:{{ photo.id }}">
-<img src="{{ MEDIA_URL }}{{ photo.image }}" style="max-width: 64"/>
+<button type="submit" name="action" value="photo_update:{{ photo.id }}" class="thumbbutton">
+<img src="{{ MEDIA_URL }}{{ photo.image }}" class="thumbnail" />
 </button>
 {% endfor %}
 </td></tr></table>
@@ -34,12 +47,12 @@ Das Foto links durch ein anderes ersetzen:<br/>
 <button type="submit" name="action" value="delete">Löschen</button>
 </form>
 </div>
-<hr/>
+<div class="insert">
 <form action="{% url 'PhotoBlog:insert' project.id %}" method="POST">
 {% csrf_token %} 
 <input type="hidden" name="after" value="{{ element.id }}"/>
 <button type="submit" value="T" name="type">Hier einen Textabschnitt einfügen</button>
 <button type="submit" value="P" name="type">Hier ein Foto einfügen</button>
 </form>
-<hr/>
+</div>
 {% endfor %}

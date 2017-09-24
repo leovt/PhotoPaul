@@ -1,8 +1,24 @@
+<!DOCTYPE html>
+<html><head>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'PhotoBlog/style.css' %}" />
+<title>{{ project }}</title>
+</head>
+<body>
+<nav class="toolbar">
+<a class="tool" href="#">Bearbeiten</a>
+<a class="tool" href="#">Photos hochladen</a>
+<a class="tool" href="#">Veröffentlichen</a>
+<a class="tool" href="#">Abmelden</a>
+</nav>
+<article class="blog">
 <h1>{{ project }}</h1>
 {% for element in project.ordered_elements %}
 {% if element.type == "T" %}
 <p>{{ element.text }}</p>
 {% elif element.type == "P" %}
-<p><img src="{{ MEDIA_URL }}{{ element.photo.image }}" style="max-width: 80%"/></p>
+<p><img src="{{ MEDIA_URL }}{{ element.photo.image }}" class="photo" /></p>
 {% endif %}
 {% endfor %}
+</article>
+</body></html>

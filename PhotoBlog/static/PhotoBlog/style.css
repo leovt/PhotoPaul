@@ -1,0 +1,49 @@
+.blog {
+	max-width:600px;
+	margin: 0 auto;
+	background-color: white;
+	padding: 1em 5em;
+}
+
+.menu {
+	max-width: 200px;
+	background-color: beige;
+	padding: 1em;
+}
+
+.toolbar {
+	background-color: white;
+	margin: 1em auto;
+}
+
+.tool {
+	background-color: green;
+	color: white;
+	font-weight: bold;
+	padding: 10px;
+	margin: 10px;
+	border: 2px solid;
+	border-color: green;
+	text-decoration: none;
+	display: inline-block;
+}
+
+a.tool:hover {
+	background-color: white;
+	color: green;
+}
+
+@media (max-width: 480px) {
+	.blog {
+		padding: 0.5em;
+	}
+}
+body {
+	background-color: lightblue;
+	font-family: sans-serif;
+}
+
+.photo {
+	max-width: 100%;
+	margin: auto;
+}

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html><head>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'PhotoBlog/style.css' %}" />
+<title>Alle Beiträge</title>
+</head>
+<body>
+<nav class="toolbar">
+<a class="tool" href="#">Neuen Beitrag schreiben</a>
+<a class="tool" href="{% url 'logout' %}">Abmelden</a>
+</nav>
+<ul>
+{% for project in projects %}
+<li><a href="{% url 'PhotoBlog:blog' project.id %}">{{ project }}</a></li>
+{% endfor %}
+</ul>
+</body></html>

@@ -7,7 +7,7 @@
 <body>
 <nav class="toolbar">
 <a class="tool" href="{% url 'PhotoBlog:editor' project.id %}">Bearbeiten</a>
-<a class="tool" href="#">Abmelden</a>
+<a class="tool" href="{% url 'logout' %}">Abmelden</a>
 </nav>
 <article class="blog">
 <h1>{{ project }}</h1>

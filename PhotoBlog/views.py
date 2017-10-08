@@ -4,6 +4,7 @@ from django.http.response import HttpResponseBadRequest, HttpResponseRedirect, H
 from django.urls.base import reverse
 from django.utils.html import escape
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def gallery(request, project_id):
@@ -15,11 +16,15 @@ def blog(request, project_id):
     project = get_object_or_404(Project, id=project_id)
     return render(request, 'PhotoBlog/blog.html', {'project': project})
 
-# Create your views here.
+def bloglist(request):
+    return render(request, 'PhotoBlog/list.html', {'projects': Project.objects.all()})
+
+@login_required
 def editor(request, project_id):
     project = get_object_or_404(Project, id=project_id)
     return render(request, 'PhotoBlog/editor.html', {'project': project})
     
+@login_required
 def element(request, element_id):
     element = get_object_or_404(Element, id=element_id)
     project = element.project
@@ -46,6 +51,7 @@ def element(request, element_id):
     return HttpResponseRedirect(reverse('PhotoBlog:editor', args=(project.id,)) + anchor)
 
 
+@login_required
 def insert(request, project_id):
     project = get_object_or_404(Project, id=project_id)
     after_id = request.POST.get('after', None)
@@ -64,6 +70,7 @@ def insert(request, project_id):
     
     return HttpResponseRedirect('%s#el%d' % (reverse('PhotoBlog:editor', args=(project.id,)), el.id))
 
+@login_required
 def upload(request, project_id):
     project = get_object_or_404(Project, id=project_id)
     if request.method == 'GET':

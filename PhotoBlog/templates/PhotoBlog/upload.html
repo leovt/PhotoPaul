@@ -1,7 +1,27 @@
-<form method="post" enctype="multipart/form-data">
-{% csrf_token %}
-  <label>Bilder auswählen
-    <input type="file" size="50" accept="image/*" name="images" multiple> 
-  </label>  
-  <input type="submit" />
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8"/>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'PhotoBlog/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'PhotoBlog/upload.css' %}" />
+<script src="{% static 'PhotoBlog/upload.js' %}"></script>
+<title>{{ project }}</title>
+</head>
+<body>
+<form class="ulform" method="post" action="" enctype="multipart/form-data" id="ulform">
+	{% csrf_token %}
+  <div class="ul_input">
+    <input class="ul_file" type="file" name="images" id="file" multiple />
+    <label for="file"><strong>Photo auswählen</strong><span class="ul_drop"> oder hier ablegen</span>.</label>
+    <button class="ul_button" type="submit">Hochladen</button>
+  </div>
+  <div class="uploading">wird hochgeladen...</div>
+  <div class="success">Fertig!</div>
+  <div class="error">Fehler!</div>
 </form>
+
+{% for photo in project.photo_set.all %}
+<img src="{{ MEDIA_URL }}{{ photo.image }}" class="thumbnail"/>
+{% endfor %}
+</body>
+</html>

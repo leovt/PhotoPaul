@@ -93,4 +93,10 @@ textarea {
 .tocitem {
 	border-radius: 1ex;
 	margin-top: 1ex;
-	}
+}
+	
+.warning {
+	font-weight: bold;
+	color: orange;
+	border: solid orange;
+}

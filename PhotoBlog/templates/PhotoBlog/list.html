@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html><head>
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'PhotoBlog/style.css' %}" />
-<title>Alle Beiträge</title>
-</head>
-<body>
-<nav class="toolbar">
+{% extends 'PhotoBlog/base.html' %}
+
+{% block title %}
+Pauls Reiseblog
+{% endblock %}
+
+{% block nav %}
 <a class="tool" href="#">Neuen Beitrag schreiben</a>
-<a class="tool" href="{% url 'logout' %}">Abmelden</a>
-</nav>
+{% endblock %}
+
+{% block body %}
 {% for project in projects %}
 <div class="blog tocitem{% if not project.is_public %} private{% endif %}">
 <a href="{% url 'PhotoBlog:blog' project.id %}">{{ project }}</a>
@@ -17,5 +17,4 @@
 {% endif %}
 </div>
 {% endfor %}
-</ul>
-</body></html>
+{% endblock %}

@@ -1,5 +1,9 @@
 {% extends 'PhotoBlog/base.html' %}
 
+{% block title %}
+{{ project }}
+{% endblock %}
+
 {% block nav %}
 <a class="tool" href="{% url 'PhotoBlog:editor' project.id %}">Bearbeiten</a>
 {% endblock %}
@@ -7,6 +11,9 @@
 {% block body %}
 <article class="blog">
 <h1>{{ project }}</h1>
+{% if not project.is_public %}
+<span class="warning">Dieser Beitrag ist noch nicht veröffentlicht.</span>
+{% endif %}
 {% for element in project.ordered_elements %}
 {% if element.type == "T" %}
 <p>{{ element.text }}</p>

@@ -2,7 +2,10 @@
 <html><head>
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'PhotoBlog/style.css' %}" />
-<title>{{ project }}</title>
+<title>
+{% block title %}
+{% endblock %}
+</title>
 </head>
 <body>
 <nav class="toolbar">
@@ -11,7 +14,7 @@
 {% endblock %}
 
 {% if user.is_authenticated %}
-<span class="auth">Angeldet als {{user}} <a href="{% url 'logout' %}?next={{request.get_full_path}}">Abmelden</a></span>
+<span class="auth">Angemeldet als {{user}}. <a href="{% url 'logout' %}">Abmelden</a></span>
 {% else %}
 <a class="auth" href="{% url 'login' %}?next={{request.get_full_path}}">Anmelden</a>
 {% endif %}

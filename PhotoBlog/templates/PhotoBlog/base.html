@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html><head>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'PhotoBlog/style.css' %}" />
+<title>{{ project }}</title>
+</head>
+<body>
+<nav class="toolbar">
+
+{% block nav %}
+{% endblock %}
+
+{% if user.is_authenticated %}
+<span class="auth">Angeldet als {{user}} <a href="{% url 'logout' %}?next={{request.get_full_path}}">Abmelden</a></span>
+{% else %}
+<a class="auth" href="{% url 'login' %}?next={{request.get_full_path}}">Anmelden</a>
+{% endif %}
+</nav>
+
+{% block body %}
+{% endblock %}
+
+</body></html>

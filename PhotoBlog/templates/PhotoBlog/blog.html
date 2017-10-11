@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html><head>
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'PhotoBlog/style.css' %}" />
-<title>{{ project }}</title>
-</head>
-<body>
-<nav class="toolbar">
+{% extends 'PhotoBlog/base.html' %}
+
+{% block nav %}
 <a class="tool" href="{% url 'PhotoBlog:editor' project.id %}">Bearbeiten</a>
-{% if user.is_authenticated %}
-<span class="auth">Angeldet als {{user}} <a href="{% url 'logout' %}?next={{request.get_full_path}}">Abmelden</a></span>
-{% else %}
-<a class="auth" href="{% url 'login' %}?next={{request.get_full_path}}">Anmelden</a>
-{% endif %}
-</nav>
+{% endblock %}
+
+{% block body %}
 <article class="blog">
 <h1>{{ project }}</h1>
 {% for element in project.ordered_elements %}
@@ -22,5 +14,4 @@
 <p><img src="{{ MEDIA_URL }}{{ element.photo.image }}" class="photo" /></p>
 {% endif %}
 {% endfor %}
-</article>
-</body></html>
+{% endblock %}

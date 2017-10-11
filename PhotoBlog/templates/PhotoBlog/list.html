@@ -9,9 +9,13 @@
 <a class="tool" href="#">Neuen Beitrag schreiben</a>
 <a class="tool" href="{% url 'logout' %}">Abmelden</a>
 </nav>
-<ul>
 {% for project in projects %}
-<li><a href="{% url 'PhotoBlog:blog' project.id %}">{{ project }}</a></li>
+<div class="blog tocitem{% if not project.is_public %} private{% endif %}">
+<a href="{% url 'PhotoBlog:blog' project.id %}">{{ project }}</a>
+{% if not project.is_public %}
+<span class="warning">Dieser Beitrag ist noch nicht veröffentlicht.</span>
+{% endif %}
+</div>
 {% endfor %}
 </ul>
 </body></html>

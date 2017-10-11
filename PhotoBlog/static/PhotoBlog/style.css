@@ -28,6 +28,10 @@
 	display: inline-block;
 }
 
+.auth {
+	float: right;
+}
+
 a.tool:hover {
 	background-color: white;
 	color: green;
@@ -81,3 +85,12 @@ textarea {
 	font-family: inherit;
 	border: none;
 }
+
+.private {
+	background-color: lightgrey;
+}
+
+.tocitem {
+	border-radius: 1ex;
+	margin-top: 1ex;
+	}

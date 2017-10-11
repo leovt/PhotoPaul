@@ -7,7 +7,11 @@
 <body>
 <nav class="toolbar">
 <a class="tool" href="{% url 'PhotoBlog:editor' project.id %}">Bearbeiten</a>
-<a class="tool" href="{% url 'logout' %}">Abmelden</a>
+{% if user.is_authenticated %}
+<span class="auth">Angeldet als {{user}} <a href="{% url 'logout' %}?next={{request.get_full_path}}">Abmelden</a></span>
+{% else %}
+<a class="auth" href="{% url 'login' %}?next={{request.get_full_path}}">Anmelden</a>
+{% endif %}
 </nav>
 <article class="blog">
 <h1>{{ project }}</h1>

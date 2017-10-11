@@ -5,19 +5,33 @@ from django.urls.base import reverse
 from django.utils.html import escape
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.middleware import get_user
+from django.contrib.auth.views import redirect_to_login
 
 # Create your views here.
 def gallery(request, project_id):
     project = get_object_or_404(Project, id=project_id)
+    
+    if not get_user(request).is_authenticated() and not project.is_public:
+        return redirect_to_login(request.get_full_path())    
+      
     return render(request, 'PhotoBlog/gallery.html', {'project': project})
 
 # Create your views here.
 def blog(request, project_id):
     project = get_object_or_404(Project, id=project_id)
+    
+    if not get_user(request).is_authenticated() and not project.is_public:
+        return redirect_to_login(request.get_full_path())    
+      
     return render(request, 'PhotoBlog/blog.html', {'project': project})
 
 def bloglist(request):
-    return render(request, 'PhotoBlog/list.html', {'projects': Project.objects.all()})
+    if get_user(request).is_authenticated():
+        projects = Project.objects.all()
+    else:
+        projects = Project.objects.filter(is_public=True)
+    return render(request, 'PhotoBlog/list.html', {'projects': projects})
 
 @login_required
 def editor(request, project_id):

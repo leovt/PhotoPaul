@@ -4,8 +4,7 @@ from django.db.models import F
 # Create your models here.
 class Project(models.Model):
     name = models.CharField(max_length=100)
-    #first = models.ForeignKey('Element', null=True, blank=True, related_name='+')
-    #last = models.ForeignKey('Element', null=True, blank=True, related_name='+')
+    is_public = models.BooleanField(default=False)
     
     def __str__(self):
         return self.name

@@ -10,10 +10,15 @@
 <body>
 <nav class="toolbar">
 
+<a href={% url 'PhotoBlog:list' %}><img src="{% static 'PhotoBlog/logo.png' %}" alt="[logo] Pauls Reiseblog" class="logo"/> Pauls Reiseblog</a>
 {% block nav %}
 {% endblock %}
 
 {% if user.is_authenticated %}
+
+{% block navauth %}
+{% endblock %}
+
 <span class="auth">Angemeldet als {{user}}. <a href="{% url 'logout' %}">Abmelden</a></span>
 {% else %}
 <a class="auth" href="{% url 'login' %}?next={{request.get_full_path}}">Anmelden</a>

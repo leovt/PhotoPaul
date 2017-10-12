@@ -4,11 +4,12 @@
 Pauls Reiseblog
 {% endblock %}
 
-{% block nav %}
-<a class="tool" href="#">Neuen Beitrag schreiben</a>
-{% endblock %}
-
 {% block body %}
+{% if user.is_authenticated %}
+<div class="blog tocitem private">
+<a href="#">Einen neuen Beitrag schreiben</a>
+</div>
+{% endif %}
 {% for project in projects %}
 <div class="blog tocitem{% if not project.is_public %} private{% endif %}">
 <a href="{% url 'PhotoBlog:blog' project.id %}">{{ project }}</a>

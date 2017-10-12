@@ -86,6 +86,12 @@ textarea {
 	border: none;
 }
 
+.logo {
+	max-height: 5ex;
+	margin: 1ex;
+	vertical-align: middle;
+}
+
 .private {
 	background-color: lightgrey;
 }

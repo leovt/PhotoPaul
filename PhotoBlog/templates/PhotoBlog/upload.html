@@ -1,13 +1,20 @@
-<!DOCTYPE html>
-<html><head>
-<meta charset="utf-8"/>
+{% extends 'PhotoBlog/base.html' %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'PhotoBlog/style.css' %}" />
+{% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'PhotoBlog/upload.css' %}" />
 <script src="{% static 'PhotoBlog/upload.js' %}"></script>
-<title>{{ project }}</title>
-</head>
-<body>
+{% endblock %}
+{% block title %}
+{{ project }}
+{% endblock %}
+
+{% block navauth %}
+<a class="tool" href="{% url 'PhotoBlog:blog' project.id %}">Seite ansehen</a>
+<a class="tool" href="{% url 'PhotoBlog:editor' project.id %}">Bearbeiten</a>
+<a class="tool" href="{% url 'PhotoBlog:upload' project.id %}">Photos hochladen</a>
+{% endblock %}
+
+{% block body %}
 <form class="ulform" method="post" action="" enctype="multipart/form-data" id="ulform">
 	{% csrf_token %}
   <div class="ul_input">
@@ -23,5 +30,4 @@
 {% for photo in project.photo_set.all %}
 <img src="{{ MEDIA_URL }}{{ photo.image }}" class="thumbnail"/>
 {% endfor %}
-</body>
-</html>
+{% endblock %}

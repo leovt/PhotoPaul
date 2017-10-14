@@ -44,6 +44,7 @@ window.onload = function ()
 	  		ajaxData.append('images', files[i], files[i].name);
 	  	}
 	  	var xhr = new XMLHttpRequest();
+	  	xhr.onloadend = function(evt){location.reload(true);};
 	  	xhr.open('POST', document.URL);
 	  	xhr.send(ajaxData);
 	  }

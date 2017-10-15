@@ -99,3 +99,13 @@ def upload(request, project_id):
             ph.save()
             photos.append((ph, len(image)))
         return HttpResponse(escape(repr(photos)))
+
+def create(request):
+    if request.method == 'GET':
+        return render(request, 'PhotoBlog/create.html')
+    if request.method == "POST":
+        project = Project(name=request.POST['name'])
+        project.save()
+        return HttpResponseRedirect(reverse('PhotoBlog:upload', args=(project.id,)))
+        
+    

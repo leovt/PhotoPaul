@@ -1,0 +1,21 @@
+{% extends 'PhotoBlog/base.html' %}
+{% block title %}
+Neuen Artikel erstellen
+{% endblock %}
+
+{% block body %}
+<p>Einen neuen Artikel erstellen: Kurzanleitung
+<ol>
+<li>Auf dieser Seite einen Titel eingeben.</li>
+<li>Auf der nächsten Seite Photos hochladen.</li>
+<li>Artikel schreiben. (er ist nur für dich sichtbar)</li>
+<li>Artikel veröffentlichen.</li>
+</ol>
+</p>
+<form method="POST" class="blog">
+{% csrf_token %}
+<p>Titel: <input type="text" value="Hier Titel eingeben" name="name"/></p>
+<p><button type="submit">Neuen Artikel erstellen</button></p>
+<p><a href="{% url 'PhotoBlog:list' %}">Keinen neuen Artikel erstellen</a></p>
+</form>
+{% endblock %}

@@ -7,7 +7,7 @@ Pauls Reiseblog
 {% block body %}
 {% if user.is_authenticated %}
 <div class="blog tocitem private">
-<a href="#">Einen neuen Beitrag schreiben</a>
+<a href="{% url 'PhotoBlog:create' %}">Einen neuen Beitrag schreiben</a>
 </div>
 {% endif %}
 {% for project in projects %}

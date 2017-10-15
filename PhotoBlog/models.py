@@ -1,7 +1,8 @@
 from django.db import models
 from django.db.models import F
+from django.utils.encoding import python_2_unicode_compatible
 
-# Create your models here.
+@python_2_unicode_compatible
 class Project(models.Model):
     name = models.CharField(max_length=100)
     is_public = models.BooleanField(default=False)
@@ -29,6 +30,7 @@ class Project(models.Model):
         return el
         
     
+@python_2_unicode_compatible
 class Photo(models.Model):
     date_taken = models.DateTimeField()
     image = models.ImageField(upload_to='photo_uploads/')
@@ -37,6 +39,7 @@ class Photo(models.Model):
     def __str__(self):
         return self.image.name
     
+@python_2_unicode_compatible
 class Element(models.Model):
     TEXT = 'T'
     PHOTO = 'P'
@@ -52,7 +55,6 @@ class Element(models.Model):
     class Meta:
         unique_together = (('project', 'order'),
                            )
-    
     def __str__(self):
         if self.type == Element.TEXT:
             return (self.text or '')[:15]  + ' ...'

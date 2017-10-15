@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block navauth %}
+<a class="tool" href="{% url 'PhotoBlog:blog' project.id %}">Seite ansehen</a>
 <a class="tool" href="{% url 'PhotoBlog:editor' project.id %}">Bearbeiten</a>
+<a class="tool" href="{% url 'PhotoBlog:upload' project.id %}">Photos hochladen</a>
 {% endblock %}
 
 {% block body %}

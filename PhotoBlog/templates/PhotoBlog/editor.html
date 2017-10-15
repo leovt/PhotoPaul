@@ -1,11 +1,19 @@
 {% extends 'PhotoBlog/base.html' %}
-
+{% load static %}
+{% block head %}
+<script src="{% static 'PhotoBlog/editor.js' %}"></script>
+{% endblock %}
+window.onload = function ()
+{
+	
+}
 {% block title %}
 {{ project }}</title>
 {% endblock %}
 
 {% block nav %}
 <a class="tool" href="{% url 'PhotoBlog:blog' project.id %}">Seite ansehen</a>
+<a class="tool" href="{% url 'PhotoBlog:editor' project.id %}">Bearbeiten</a>
 <a class="tool" href="{% url 'PhotoBlog:upload' project.id %}">Photos hochladen</a>
 {% endblock %}
 
@@ -27,7 +35,7 @@ Titel: <input type="text" value="{{ project }}" />
 {% csrf_token %} 
 {% if element.type == "T" %}
 <textarea rows=6 name="text">{{ element.text }}</textarea>
-<button type="submit" name="action" value="text_update">Speichern</button>
+<button type="submit" name="action" value="text_update" class="text_update">Speichern</button>
 {% elif element.type == "P" %}
 <table>
 <tr>

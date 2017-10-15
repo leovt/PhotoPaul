@@ -92,6 +92,11 @@ textarea {
 	vertical-align: middle;
 }
 
+.save_pending {
+	background-color: yellow;
+}
+
+
 .private {
 	background-color: lightgrey;
 }

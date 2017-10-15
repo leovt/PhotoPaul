@@ -45,11 +45,13 @@ def element(request, element_id):
     anchor = ''
     if request.POST['action'] == 'delete':
         element.delete()
-    elif request.POST['action'] == 'text_update':
+    elif request.POST['action'].startswith('text_update'):
         if element.type != Element.TEXT:
             return HttpResponseBadRequest("need to specify valid action")
         element.text = request.POST.get('text', '')
         element.save()    
+        if request.POST['action'] == 'text_update_ajax':
+            return HttpResponse(status=204)
     elif request.POST['action'].startswith('photo_update:'):
         if element.type != Element.PHOTO:
             return HttpResponseBadRequest("need to specify valid action")

@@ -17,7 +17,18 @@
 {% block body %}
 <article class="blog" style="max-width: 95%">
 <h1>{{ project }}</h1>
-Titel: <input type="text" value="{{ project }}" name="name"/>
+{% if not project.is_public %}
+<span class="warning">Dieser Beitrag ist noch nicht veröffentlicht.</span>
+{% else %}
+<span class="warning">Dieser Beitrag ist öffentlich.</span>
+{% endif %}
+<form method="POST" class="edit">
+{% csrf_token %}
+<p>Titel ändern: <input type="text" value="{{ project }}" name="name"/></p>
+<p><input type="radio" name="is_public" id="r1" value="1" {% if project.is_public %}checked="checked"{% endif %}/><label for="r1">Veröffentlicht (alle können den Artikel sehen)</label></p>
+<p><input type="radio" name="is_public" id="r2" value="0" {% if not project.is_public %}checked="checked"{% endif %} /><label for="r2">Privat (nur Autoren können den Artikel sehen)</label></p>
+<p><button type="submit">OK</button></p>
+</form>
 <div class="insert">
 <form action="{% url 'PhotoBlog:insert' project.id %}" method="POST">
 {% csrf_token %} 

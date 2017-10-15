@@ -36,7 +36,14 @@ def bloglist(request):
 @login_required
 def editor(request, project_id):
     project = get_object_or_404(Project, id=project_id)
-    return render(request, 'PhotoBlog/editor.html', {'project': project})
+    if request.method == 'GET':
+        return render(request, 'PhotoBlog/editor.html', {'project': project})
+    if request.method == "POST":
+        project.name = request.POST['name']
+        project.is_public = int(request.POST['is_public'])
+        project.save()
+        return HttpResponseRedirect(reverse('PhotoBlog:editor', args=(project.id,)))
+        
     
 @login_required
 def element(request, element_id):

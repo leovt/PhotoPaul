@@ -3,12 +3,9 @@
 {% block head %}
 <script src="{% static 'PhotoBlog/editor.js' %}"></script>
 {% endblock %}
-window.onload = function ()
-{
-	
-}
+
 {% block title %}
-{{ project }}</title>
+{{ project }}
 {% endblock %}
 
 {% block nav %}
@@ -20,7 +17,7 @@ window.onload = function ()
 {% block body %}
 <article class="blog" style="max-width: 95%">
 <h1>{{ project }}</h1>
-Titel: <input type="text" value="{{ project }}" />
+Titel: <input type="text" value="{{ project }}" name="name"/>
 <div class="insert">
 <form action="{% url 'PhotoBlog:insert' project.id %}" method="POST">
 {% csrf_token %} 

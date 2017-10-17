@@ -44,8 +44,13 @@ window.onload = function ()
 		/*document.body.appendChild(img);*/;
 		/*document.body.appendChild(canvas);*/
 	  	img.onload = function () {
-		  	canvas.width = 200;
-		  	canvas.height = 200;
+	  		var MAX_SIZE = 2000;
+	  		var QUALITY = 0.7;
+	  		
+	  		var scale_factor = MAX_SIZE / Math.max(img.width, img.height, MAX_SIZE);
+	  		
+		  	canvas.width = img.width * scale_factor;
+		  	canvas.height = img.height * scale_factor;
 			/*canvas.style.position = "fixed";
 		  	canvas.left = -canvas.width;*/
 		  	var ctx = canvas.getContext("2d");

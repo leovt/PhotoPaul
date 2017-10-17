@@ -37,16 +37,46 @@ window.onload = function ()
 	  	submitFiles(droppedFiles);
 	  }
 	  
+	  var canvas = document.createElement("canvas");
+	  var img = document.createElement("img");
+	  resizeImage = function(file, callback) {
+		 //document.createElement("canvas");
+		/*document.body.appendChild(img);*/;
+		/*document.body.appendChild(canvas);*/
+	  	img.onload = function () {
+		  	canvas.width = 200;
+		  	canvas.height = 200;
+			/*canvas.style.position = "fixed";
+		  	canvas.left = -canvas.width;*/
+		  	var ctx = canvas.getContext("2d");
+		  	ctx.drawImage(img,0,0,canvas.width,canvas.height);
+	  		canvas.toBlob(callback, "image/jpeg", 0.7);
+	  	}
+	  	img.src = window.URL.createObjectURL(file);
+	  };
+	  
 	  submitFiles = function(files) {
 	  	var ajaxData = new FormData(form);
 	  	
-	  	for (i=0; i<files.length; ++i){
-	  		ajaxData.append('images', files[i], files[i].name);
-	  	}
+	  	var send = function(){
+	  		xhr.send(ajaxData);
+	  	};
+	  	
 	  	var xhr = new XMLHttpRequest();
 	  	xhr.onloadend = function(evt){location.reload(true);};
 	  	xhr.open('POST', document.URL);
-	  	xhr.send(ajaxData);
+
+	  	var addfile = function(i) {
+	  		if (i==files.length){
+		  		xhr.send(ajaxData);
+		  	}
+		  	resizeImage(files[i], function(blob) {
+		  		ajaxData.append('images', blob, files[i].name);
+		  		addfile(i+1);
+		  	});
+	  	};
+	  	
+	  	addfile(0);
 	  }
 	}
 }

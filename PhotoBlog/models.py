@@ -25,6 +25,8 @@ class Project(models.Model):
             el.save()
 
         el = Element(project=self, type=type, order=after_order+1)
+        if el.type == Element.TEXT:
+            el.text = ''
         el.save()
 
         return el

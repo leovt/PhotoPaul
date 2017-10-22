@@ -49,8 +49,9 @@ def editor(request, project_id):
 def element(request, element_id):
     element = get_object_or_404(Element, id=element_id)
     project = element.project
-    anchor = ''
+    anchor = '#el%d' % element.id
     if request.POST['action'] == 'delete':
+        anchor = ''
         element.delete()
     elif request.POST['action'].startswith('text_update'):
         if element.type != Element.TEXT:

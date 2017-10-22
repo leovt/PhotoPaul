@@ -1,6 +1,8 @@
 from django.db import models
 from django.db.models import F
 from django.utils.encoding import python_2_unicode_compatible
+from PIL import Image
+from PIL.Image import ROTATE_90, ROTATE_270
 
 @python_2_unicode_compatible
 class Project(models.Model):
@@ -40,6 +42,14 @@ class Photo(models.Model):
     
     def __str__(self):
         return self.image.name
+    
+    def rotate_ccw(self):
+        im = Image.open(self.image.path)
+        im.transpose(ROTATE_90).save(self.image.path)
+    
+    def rotate_cw(self):
+        im = Image.open(self.image.path)
+        im.transpose(ROTATE_270).save(self.image.path)
     
 @python_2_unicode_compatible
 class Element(models.Model):

@@ -60,6 +60,14 @@ def element(request, element_id):
         element.save()    
         if request.POST['action'] == 'text_update_ajax':
             return HttpResponse(status=204)
+    elif request.POST['action'] == ('rotate_cw'):
+        if element.type != Element.PHOTO:
+            return HttpResponseBadRequest("need to specify valid action")
+        element.photo.rotate_cw()
+    elif request.POST['action'] == ('rotate_ccw'):
+        if element.type != Element.PHOTO:
+            return HttpResponseBadRequest("need to specify valid action")
+        element.photo.rotate_ccw()
     elif request.POST['action'].startswith('photo_update:'):
         if element.type != Element.PHOTO:
             return HttpResponseBadRequest("need to specify valid action")

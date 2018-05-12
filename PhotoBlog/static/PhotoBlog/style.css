@@ -1,6 +1,6 @@
 .blog {
 	max-width:600px;
-	margin: 0 auto;
+	margin: 100px auto;
 	background-color: white;
 	padding: 1em 5em;
 }
@@ -13,7 +13,10 @@
 
 .toolbar {
 	background-color: white;
-	margin: 1em auto;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
 }
 
 .tool {

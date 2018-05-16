@@ -47,10 +47,12 @@ class Photo(models.Model):
     def rotate_ccw(self):
         im = Image.open(self.image.path)
         im.transpose(ROTATE_90).save(self.image.path)
+        self.create_thumbnail()
     
     def rotate_cw(self):
         im = Image.open(self.image.path)
         im.transpose(ROTATE_270).save(self.image.path)
+        self.create_thumbnail()
                
     def create_thumbnail(self):
         try:

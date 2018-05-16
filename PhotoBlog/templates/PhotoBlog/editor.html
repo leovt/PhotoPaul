@@ -48,7 +48,7 @@
 <table>
 <tr>
 <td width="50%">
-<img src="{{ MEDIA_URL }}{{ element.photo.image }}" class="photo"/><br/>
+<img src="{{ MEDIA_URL }}{{ element.photo.get_tn }}" class="photo" width="100%"/><br/>
 </td>
 <td>
 <p>Das ausgewählte Foto drehen (es wird überall gedreht wo es verwendet wird).
@@ -62,7 +62,7 @@ Wenn das Foto nicht sofort gedreht erscheint, bitte F5 drücken.<br/>
 <p>Das Foto links durch ein anderes ersetzen:<br/>
 {% for photo in project.photo_set.all %}
 <button type="submit" name="action" value="photo_update:{{ photo.id }}" class="thumbbutton">
-<img src="{{ MEDIA_URL }}{{ photo.image }}" class="thumbnail" />
+<img src="{{ MEDIA_URL }}{{ photo.get_tn }}" class="thumbnail" />
 </button>
 {% endfor %}
 </td></tr></table>

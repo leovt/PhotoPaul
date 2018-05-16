@@ -28,6 +28,6 @@
 </form>
 
 {% for photo in project.photo_set.all %}
-<img src="{{ MEDIA_URL }}{{ photo.image }}" class="thumbnail"/>
+<img src="{{ MEDIA_URL }}{{ photo.get_tn }}" class="thumbnail"/>
 {% endfor %}
 {% endblock %}

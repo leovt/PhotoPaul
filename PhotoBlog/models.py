@@ -3,6 +3,7 @@ from django.db.models import F
 from django.utils.encoding import python_2_unicode_compatible
 from PIL import Image
 from PIL.Image import ROTATE_90, ROTATE_270
+import os.path
 
 @python_2_unicode_compatible
 class Project(models.Model):
@@ -50,7 +51,25 @@ class Photo(models.Model):
     def rotate_cw(self):
         im = Image.open(self.image.path)
         im.transpose(ROTATE_270).save(self.image.path)
-    
+               
+    def create_thumbnail(self):
+        try:
+            im = Image.open(self.image.path)
+        except OSError:
+            return
+        name, ext = os.path.splitext(self.image.path)
+        im.thumbnail((128,128))
+        im.save(name + '_tn' + ext)
+        
+    def get_tn(self):
+        name, ext = os.path.splitext(self.image.path)
+        tn = name + '_tn' + ext
+        if not os.path.exists(tn):
+            self.create_thumbnail()
+        print(self.image.name)
+        name, ext = os.path.splitext(self.image.name)
+        return name + '_tn' + ext
+        
 @python_2_unicode_compatible
 class Element(models.Model):
     TEXT = 'T'

@@ -55,7 +55,7 @@ ROOT_URLCONF = 'PhotoPaul.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,6 +122,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR
+print(MEDIA_ROOT)
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'

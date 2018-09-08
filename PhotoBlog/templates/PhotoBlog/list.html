@@ -5,17 +5,19 @@ Pauls Reiseblog
 {% endblock %}
 
 {% block body %}
+<article>
 {% if user.is_authenticated %}
-<div class="blog tocitem private">
+<div class="tocitem private">
 <a href="{% url 'PhotoBlog:create' %}">Einen neuen Beitrag schreiben</a>
 </div>
 {% endif %}
 {% for project in projects %}
-<div class="blog tocitem{% if not project.is_public %} private{% endif %}">
+<div class="tocitem{% if not project.is_public %} private{% endif %}">
 <a href="{% url 'PhotoBlog:blog' project.id %}">{{ project }}</a>
 {% if not project.is_public %}
 <span class="warning">Dieser Beitrag ist noch nicht veröffentlicht.</span>
 {% endif %}
 </div>
 {% endfor %}
+</article>
 {% endblock %}

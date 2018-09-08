@@ -1,8 +1,12 @@
 .blog {
-	max-width:600px;
-	margin: 100px auto;
 	background-color: white;
 	padding: 1em 5em;
+}
+
+article {
+	max-width:600px;
+	margin: auto;
+	margin-top: 70px;
 }
 
 .menu {
@@ -106,6 +110,9 @@ textarea {
 
 .tocitem {
 	border-radius: 1ex;
+	background-color: white;
+	padding: 1em 5em;
+	margin: 1em;
 }
 	
 .warning {

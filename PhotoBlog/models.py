@@ -91,7 +91,8 @@ class Element(models.Model):
         unique_together = (('project', 'order'),
                            )
     def __str__(self):
-        if self.type == Element.TEXT:
+        if self.type in (Element.RAW, Element.TEXT):
             return (self.text or '')[:15]  + ' ...'
         elif self.type == Element.PHOTO:
             return 'Photo: %s' % self.photo
+	

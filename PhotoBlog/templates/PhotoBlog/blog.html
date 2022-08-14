@@ -21,6 +21,8 @@
 <p>{{ element.text }}</p>
 {% elif element.type == "P" %}
 <p><img src="{{ MEDIA_URL }}{{ element.photo.image }}" class="photo" /></p>
+{% elif element.type == "R" %}
+<p>{{ element.text | safe }}</p>
 {% endif %}
 {% endfor %}
 </article>

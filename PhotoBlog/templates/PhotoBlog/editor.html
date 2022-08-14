@@ -31,7 +31,7 @@
 </form>
 <div class="insert">
 <form action="{% url 'PhotoBlog:insert' project.id %}" method="POST">
-{% csrf_token %} 
+{% csrf_token %}
 <button type="submit" value="T" name="type">Hier einen Textabschnitt einfügen</button>
 <button type="submit" value="P" name="type">Hier ein Foto einfügen</button>
 </form>
@@ -40,7 +40,7 @@
 {% for element in project.ordered_elements %}
 <div id="el{{element.id}}" class="edit edit{{element.type}}">
 <form action="{% url 'PhotoBlog:element' element.id %}" method="POST">
-{% csrf_token %} 
+{% csrf_token %}
 {% if element.type == "T" %}
 <textarea rows=6 name="text">{{ element.text }}</textarea>
 <button type="submit" name="action" value="text_update" class="text_update">Speichern</button>
@@ -66,14 +66,16 @@ Wenn das Foto nicht sofort gedreht erscheint, bitte F5 drücken.<br/>
 </button>
 {% endfor %}
 </td></tr></table>
-
+{% elif element.type == "R" %}
+<p>Dieses Element kann nicht bearbeitet werden.</p>
+<p>{{ element.text | safe }}</p>
 {% endif %}
 <button type="submit" name="action" value="delete">Löschen</button>
 </form>
 </div>
 <div class="insert">
 <form action="{% url 'PhotoBlog:insert' project.id %}" method="POST">
-{% csrf_token %} 
+{% csrf_token %}
 <input type="hidden" name="after" value="{{ element.id }}"/>
 <button type="submit" value="T" name="type">Hier einen Textabschnitt einfügen</button>
 <button type="submit" value="P" name="type">Hier ein Foto einfügen</button>

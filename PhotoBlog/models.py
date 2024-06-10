@@ -1,11 +1,9 @@
 from django.db import models
 from django.db.models import F
-from django.utils.encoding import python_2_unicode_compatible
 from PIL import Image
 from PIL.Image import ROTATE_90, ROTATE_270
 import os.path
 
-@python_2_unicode_compatible
 class Project(models.Model):
     name = models.CharField(max_length=100)
     is_public = models.BooleanField(default=False)
@@ -35,7 +33,6 @@ class Project(models.Model):
         return el
 
 
-@python_2_unicode_compatible
 class Photo(models.Model):
     date_taken = models.DateTimeField()
     image = models.ImageField(upload_to='photo_uploads/')
@@ -72,7 +69,6 @@ class Photo(models.Model):
         name, ext = os.path.splitext(self.image.name)
         return name + '_tn' + ext
 
-@python_2_unicode_compatible
 class Element(models.Model):
     TEXT = 'T'
     PHOTO = 'P'

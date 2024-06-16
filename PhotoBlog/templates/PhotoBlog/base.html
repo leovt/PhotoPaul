@@ -20,8 +20,10 @@
 
 {% block navauth %}
 {% endblock %}
-
-<span class="auth">Angemeldet als {{user}}. <a href="{% url 'logout' %}">Abmelden</a></span>
+<form method="post" action="{% url 'logout' %}" style='display:inline;'>
+    {% csrf_token %}
+    <span class="auth">Angemeldet als {{user}}. <button type="submit">logout</button></span>
+</form>
 {% else %}
 <a class="auth" href="{% url 'login' %}?next={{request.get_full_path}}">Anmelden</a>
 {% endif %}

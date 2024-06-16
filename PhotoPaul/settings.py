@@ -69,6 +69,8 @@ TEMPLATES = [
     },
 ]
 
+LOGOUT_REDIRECT_URL = '/'
+
 WSGI_APPLICATION = 'PhotoPaul.wsgi.application'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
